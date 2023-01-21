@@ -1,0 +1,18 @@
+FROM buildpack-deps as download
+
+ARG TERRAFORM_VERSION
+
+RUN mkdir /download && \
+    cd /download && \
+    download_file="terraform_${TERRAFORM_VERSION}_$(uname | tr '[:upper:]' '[:lower:]')_$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/').zip" && \
+    echo "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/${download_file}" && \
+    curl -fsSLO "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/${download_file}" && \
+    unzip "${download_file}"
+
+FROM gcr.io/distroless/base-debian11:latest
+
+COPY --from=download /download/terraform /bin/terraform
+
+ENV PATH=/bin
+
+ENTRYPOINT ["terraform"]
