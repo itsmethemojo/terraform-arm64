@@ -1,6 +1,14 @@
 {
     "enabledManagers": ["terraform-version"],
     "platformAutomerge": true,
-    "automergeStrategy": "fast-forward",
-    "automerge": true
+    "packageRules": [
+    {
+      "matchManagers": ["terraform-version"],
+      "commitMessagePrefix": "",
+      "automergeType": "branch",
+      "automergeStrategy": "fast-forward",
+      "ignoreTests": true,
+      "automerge": true
+    }
+  ]
 }
