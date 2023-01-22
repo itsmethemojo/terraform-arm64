@@ -1,4 +1,6 @@
 {
     "enabledManagers": ["terraform-version"],
-    "platformAutomerge": true
+    "platformAutomerge": true,
+    "automergeStrategy": "fast-forward",
+    "automerge": true
 }
