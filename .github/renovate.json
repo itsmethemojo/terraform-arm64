@@ -1,0 +1,16 @@
+{
+    "packageRules": [
+      {
+        "matchManagers": [
+          "*"
+        ],
+        "enabled": false
+      },
+      {
+        "matchManagers": [
+          "terraform-version"
+        ],
+        "enabled": true
+      }
+    ]
+  }
