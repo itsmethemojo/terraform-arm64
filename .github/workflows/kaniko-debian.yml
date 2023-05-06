@@ -13,7 +13,6 @@ jobs:
     env:
       REGISTRY: ghcr.io
       IMAGE_NAME: ${{ github.repository }}
-      BASE_IMAGE: debian:latest
     permissions:
       contents: read
       packages: write
@@ -36,7 +35,7 @@ jobs:
           mkdir -p /kaniko/.docker &&
           echo "{\"auths\":{\"${REGISTRY}\":{\"username\":\"${GITHUB_ACTOR}\",\"password\": \"${{ secrets.GITHUB_TOKEN }}\"}}}"  > /kaniko/.docker/config.json &&
           /kaniko/executor
+          --dockerfile Dockerfile-debian
           --build-arg TERRAFORM_VERSION=${TERRAFORM_VERSION}
-          --build-arg BASE_IMAGE=${BASE_IMAGE}
           --context $(pwd)
           --destination "${REGISTRY}/${IMAGE_NAME}:${TERRAFORM_VERSION}-debian"
