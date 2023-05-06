@@ -1,3 +1,5 @@
+ARG BASE_IMAGE
+
 FROM buildpack-deps as download
 
 ARG TERRAFORM_VERSION
@@ -9,7 +11,7 @@ RUN mkdir /download && \
     curl -fsSLO "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/${download_file}" && \
     unzip "${download_file}"
 
-FROM gcr.io/distroless/base-debian11:latest
+FROM $BASE_IMAGE
 
 COPY --from=download /download/terraform /bin/terraform
 
