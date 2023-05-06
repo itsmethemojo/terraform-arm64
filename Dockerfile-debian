@@ -9,7 +9,7 @@ RUN mkdir /download && \
     curl -fsSLO "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/${download_file}" && \
     unzip "${download_file}"
 
-FROM debian:latest
+FROM buildpack-deps:stable-scm
 
 COPY --from=download /download/terraform /bin/terraform
 
