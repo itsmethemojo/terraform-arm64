@@ -1,5 +1,5 @@
 # this is needed because the docker image multi arch build seems not to work properly
-name: kaniko
+name: kaniko-distroless
 
 on:
   push:
